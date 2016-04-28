@@ -1,0 +1,27 @@
+<html>
+<head>
+	<title>test proxy websocket</title>
+</head>
+<body>
+<script src="../src/websocket-wrapper.js"></script>
+<script type="application/javascript">
+OverideWebsocket({
+    presend: function(data){
+        return "Alter data" + data;
+    }
+});
+</script>
+
+<script type="application/javascript">
+var ws = new WebSocket('ws://echo.websocket.org');
+ws.onmessage = function(event) {
+    console.log('Here is the official process');
+};
+
+ws.onopen = function(event) {
+    console.log('Here is the official connection handler');
+    ws.send('Official content');   
+}
+</script>
+</body>
+</html>
