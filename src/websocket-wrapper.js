@@ -1,6 +1,6 @@
 (function(window){
     window.OverideWebsocket = function (options){
-        var options = Object.assign({
+        options = Object.assign({
             presend: function(data) {return data;},
             send: function(){},
             postsend: function(){},
