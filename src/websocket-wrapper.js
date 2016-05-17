@@ -1,26 +1,23 @@
 (function(window){
-    window.OverideWebsocket = function (override){
-        var options = {
-            presend: override.presend || function(data) {return data;},
-            send: override.send || function(){},
-            postsend: override.postsend || function(){},
-            preclose: override.preclose || function(){},
-            close: override.close || function(){},
-            postclose: override.postclose || function(){},
-            preopen: override.preopen || function(){},
-            onopen: override.onopen || function(){},
-            postopen: override.postopen || function(){},
-            preclose: override.preclose || function(){},
-            onclose: override.onclose || function(){},
-            postclose: override.postclose || function(){},
-            premessage: override.premessage || function(){},
-            onmessage: override.onmessage || function(){},
-            postmessage: override.postmessage || function(){},
-            preerror: override.preerror || function(){},
-            onerror: override.onerror || function(){},
-            posterror: override.posterror || function(){},
-        };
-    
+    window.OverideWebsocket = function (options){
+        var options = Object.assign({
+            presend: function(data) {return data;},
+            send: function(){},
+            postsend: function(){},
+            preclose: function(){},
+            onclose: function(){},
+            postclose: function(){},
+            preopen: function(){},
+            onopen: function(){},
+            postopen: function(){},
+            premessage: function(){},
+            onmessage: function(){},
+            postmessage: function(){},
+            preerror: function(){},
+            onerror: function(){},
+            posterror: function(){}
+        }, options);
+
         window.oldWebSocket = WebSocket;
         window.WebSocket = function (path, protocol) {
             this.parent = new oldWebSocket(path, protocol||[]);
